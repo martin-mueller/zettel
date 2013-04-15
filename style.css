@@ -1,0 +1,87 @@
+body, html, textarea {
+  font-family: Verdana;
+  margin: 0;
+  padding: 0;
+}
+
+#wrapper {
+  position: relative;
+}
+
+.draggable {
+  width: 150px;
+  height: 150px;
+  position: absolute;
+  padding: 0;
+  box-shadow: 5px 5px 5px #888;
+}
+
+#drag1 {
+  left: 150px;
+  top: 30px;
+  background: #6ef56e;
+}
+
+#drag2 {
+  left: 300px;
+  top: 30px;
+  background: #78eb78;
+}
+
+#drag3 {
+  left: 450px;
+  top: 30px;
+  background: #82e182;
+}
+
+#drag4 {
+  left: 600px;
+  top: 30px;
+  background: #8cd78c;
+}
+
+#drag5 {
+  left: 750px;
+  top: 180px;
+  background: #96cd96;
+}
+
+#drag6 {
+  left: 0px;
+  top: 180px;
+  background: #a0c3a0;
+}
+
+#drag7 {
+  left: 150px;
+  top: 180px;
+  background: #aab9aa;
+}
+
+#drag8 {
+  left: 300px;
+  top: 180px;
+  background: #b4afb4;
+}
+
+#drag9 {
+  left: 450px;
+  top: 180px;
+  background: #bea5be;
+}
+
+#drag10 {
+  left: 600px;
+  top: 330px;
+  background: #c89bc8;
+}
+
+textarea {
+  width: 100%;
+  height: 100%;
+  resize: none;
+  background: inherit;
+  pointer-events: none;
+  outline: none;
+  border: 0;
+}
