@@ -40,22 +40,24 @@
         }
     );
     /*Initialisation*/
-    
+    /*Get Notes from database*/
       $.get('ajax.php',
             {action: 'getAll'},
             function(data) {
                 if (data!='null'){
                     data = $.parseJSON(data);
-                
+                /*Set positions*/
                     $.each(data,function(index,v){
                       if (v.key == 'pos'){
                         pos = v.value.split(',');
                         $('#'+v.id).animate({top:pos[0]+'px',left:pos[1]+'px'},2000);
                       }
+                /*Set Size*/      
                       else if  (v.key == 'size'){
                         size = v.value.split(',');
                         $('#'+v.id).animate({width:size[0]+'px',height:size[1]+'px'},3000);
                       }
+                /*Set Text*/      
                       else if (v.key == 'text'){
                         $('#'+v.id+'>textarea').val(v.value);
                       }
