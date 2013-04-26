@@ -3,7 +3,7 @@ $db = new PDO('sqlite:zettel.sqlite');
 $db->exec('CREATE TABLE IF NOT EXISTS zettel (id, key, value, PRIMARY KEY (id, key))');
 
 
-if ($_GET['action']){
+if (isset($_GET['action'])){
 	$action = $_GET['action'];
 	if ($action == 'getAll') {
 		$res = $db->query("SELECT * FROM zettel");
@@ -23,10 +23,10 @@ if ($_GET['action']){
 
 extract($_POST);
 
-if ($id){
-	if ($pos)  save($id, 'pos',  $pos);
-	if ($size) save($id, 'size', $size);
-	if ($text!==null) save($id, 'text', $text);
+if (isset($id)){
+	if (isset($pos))  save($id, 'pos',  $pos);
+	if (isset($size)) save($id, 'size', $size);
+	if (isset($text)) save($id, 'text', $text);
 }
 
 function save($id,$key,$value){
