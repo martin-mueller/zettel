@@ -14,7 +14,7 @@
       /*Save position to db after dragging*/
       /*TODO: Save z-index*/
        stop: function(event,ui) {
-       $.post('ajax.php',
+        $.post('ajax.php',
                {id: $(this).attr('id'), pos: ui.position},
                function(data) {
                   console.log(data);
