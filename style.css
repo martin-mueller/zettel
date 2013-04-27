@@ -1,5 +1,6 @@
 body, html, textarea {
   font-family: Verdana, Arial;
+  font-size: 16px;
   margin: 0;
   padding: 0;
 }
@@ -19,61 +20,61 @@ body, html, textarea {
 #drag1 {
   left: 150px;
   top: 30px;
-  background: #6ef56e;
+  background: rgba(190, 0, 0, 0.53333);
 }
 
 #drag2 {
   left: 300px;
   top: 30px;
-  background: #78eb78;
+  background: rgba(180, 0, 0, 0.56667);
 }
 
 #drag3 {
   left: 450px;
   top: 30px;
-  background: #82e182;
+  background: rgba(170, 20, 0, 0.6);
 }
 
 #drag4 {
   left: 600px;
   top: 30px;
-  background: #8cd78c;
+  background: rgba(160, 20, 0, 0.63333);
 }
 
 #drag5 {
   left: 750px;
   top: 180px;
-  background: #96cd96;
+  background: rgba(150, 20, 0, 0.66667);
 }
 
 #drag6 {
   left: 0px;
   top: 180px;
-  background: #a0c3a0;
+  background: rgba(140, 40, 100, 0.7);
 }
 
 #drag7 {
   left: 150px;
   top: 180px;
-  background: #aab9aa;
+  background: rgba(130, 40, 100, 0.73333);
 }
 
 #drag8 {
   left: 300px;
   top: 180px;
-  background: #b4afb4;
+  background: rgba(120, 40, 100, 0.76667);
 }
 
 #drag9 {
   left: 450px;
   top: 180px;
-  background: #bea5be;
+  background: rgba(110, 60, 100, 0.8);
 }
 
 #drag10 {
   left: 600px;
   top: 330px;
-  background: #c89bc8;
+  background: rgba(100, 60, 100, 0.83333);
 }
 
 textarea {

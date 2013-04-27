@@ -10,7 +10,9 @@
   <script>
   $(function() {
     $( ".draggable" ).draggable({
+      stack: '.draggable',
       /*Save position to db after dragging*/
+      /*TODO: Save z-index*/
        stop: function(event,ui) {
        $.post('ajax.php',
                {id: $(this).attr('id'), pos: ui.position},
@@ -21,6 +23,7 @@
     })
     .resizable({
        stop: function(event,ui) {
+        console.log(ui.size);
         $.post('ajax.php',{id: $(this).attr('id'), size: ui.size});
         }
     });
@@ -40,6 +43,7 @@
     );
     /*Initialisation*/
     /*Get Notes from database*/
+    function init(){
       $.get('ajax.php',
             {action: 'getAll'},
             function(data) {
@@ -49,12 +53,12 @@
                     $.each(data,function(index,v){
                       if (v.key == 'pos'){
                         pos = v.value.split(',');
-                        $('#'+v.id).animate({top:pos[0]+'px',left:pos[1]+'px'},2000);
+                        $('#'+v.id).animate({top:pos[0]+'px',left:pos[1]+'px'},1000);
                       }
                 /*Set Size*/      
                       else if  (v.key == 'size'){
                         size = v.value.split(',');
-                        $('#'+v.id).animate({width:size[0]+'px',height:size[1]+'px'},3000);
+                        $('#'+v.id).animate({width:size[0]+'px',height:size[1]+'px'},1000);
                       }
                 /*Set Text*/      
                       else if (v.key == 'text'){
@@ -63,17 +67,20 @@
                      
                     });
                   }
+                  else alert("An Error occured, cannot read data");
               }
             );
-       
+       }
+       init();
     $('#clear').click(function () {
-       if (confirm('Wirklich alles löschen?'))
+       if (confirm("Delete really anything?\n this can't be undone!"))
        $.get('ajax.php',
             {action: 'clearAll'},
             function(data) {
-              console.log(data);
+              location.reload();
+              // console.log(data);
             }
-            );
+        );
     });
   });
   </script>
@@ -81,7 +88,7 @@
 <body>
   <div id="wrapper">
     <div id="controls">
-      <!-- <input type="button" id="clear" value="clear all" /> -->
+      <input type="button" id="clear" value="clear all" />
     </div>
      <div id="drag1" class="draggable ui-widget-content"><textarea></textarea></div>
      <div id="drag2" class="draggable ui-widget-content"><textarea></textarea></div>

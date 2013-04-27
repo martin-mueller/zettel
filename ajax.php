@@ -8,6 +8,7 @@ if (isset($_GET['action'])){
 	if ($action == 'getAll') {
 		$res = $db->query("SELECT * FROM zettel");
 		if ($res){
+			$data = array();
 			while($row = $res->fetch(PDO::FETCH_ASSOC)){
 					$data[] = $row;
 				}
@@ -21,7 +22,7 @@ if (isset($_GET['action'])){
 	}
 }
 
-extract($_POST);
+extract($_POST); //the worst part ;D
 
 if (isset($id)){
 	if (isset($pos))  save($id, 'pos',  $pos);
