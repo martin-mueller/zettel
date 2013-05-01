@@ -5,3 +5,4 @@ zettel.sublime-project
 zettel.sublime-workspace
 .sass-cache
 *.scss
+config.rb
