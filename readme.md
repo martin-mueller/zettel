@@ -25,3 +25,12 @@ It's just a small demo yet.
 ## Coming soon:
 
 * Zettel.coffee
+
+## Planned Improvements
+
+* local storage + optional cloud service
+* change colors, colorpicker
+* multi desks/ categories
+* headers
+* add/ delete notes
+* ...
