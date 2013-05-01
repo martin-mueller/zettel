@@ -27,7 +27,8 @@ if ($id > ''){
 		if (r('pos')) save($id, 'pos',  r('pos'));
 		if (r('size')) save($id, 'size', r('size'));
 		if (r('text')) save($id, 'text', r('text'));
-	}	
+	}
+	else "Server Error: id not valid, cannot save";	
 }
 
 function save($id,$key,$value){
@@ -38,7 +39,7 @@ function save($id,$key,$value){
 	$sql = "INSERT OR REPLACE INTO zettel (id,key,value) VALUES ('$id','$key','$value') ";
 	echo $sql;
 	$res = $db->exec($sql);
-	if ($res === false) echo "\n error: is zettel.sqlite writable?";
+	if ($res === false) echo "\n Server Error:  is zettel.sqlite writable?";
 	echo "\n dbo->exec result : "; var_dump($res);
 }
 function r($key){
