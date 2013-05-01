@@ -19,8 +19,8 @@ It's just a small demo yet.
 
 ## Install
 
-* upload the files
-* make sure the directory is writeable for the web server for the sqlite file
+* upload the files to a directory under your webserver root
+* make sure the directory is writeable for the web server for the sqlite database file
 
 ## Coming soon:
 
@@ -28,9 +28,14 @@ It's just a small demo yet.
 
 ## Planned Improvements
 
+* ajax/json HTTP 1.1 instead of POST (?)
 * local storage + optional cloud service
+* auto save after time (now only on textarea.focusout)
 * change colors, colorpicker
 * multi desks/ categories
 * headers
 * add/ delete notes
+* zoom in-> detail view; zoom out-> pin board view
+* markdown support
+* keyboard shortcuts/ completion
 * ...

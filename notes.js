@@ -14,10 +14,14 @@
     .resizable({
        stop: function(event,ui) {
         console.log(ui.size);
-        $.post('ajax.php',{id: $(this).attr('id'), size: ui.size});
+        $.post('ajax.php',
+          {id: $(this).attr('id'), size: ui.size},
+          function(data) {
+                  console.log(data);
+                });
         }
     });
-    $('.draggable').mouseup(function(){   
+    $('.draggable').mouseup(function(){
       $('textarea',this).focus();
     });
     $('.draggable').dblclick(function(event) {
@@ -27,7 +31,10 @@
     });
     $('.draggable').focusout(function() {
         $.post('ajax.php',
-               {id: $(this).attr('id'), text: $('textarea',this).val()});
+               {id: $(this).attr('id'), text: $('textarea',this).val()},
+               function(data) {
+                  console.log(data);
+                });
         }
     );
     /*Initialisation*/

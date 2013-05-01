@@ -21,20 +21,27 @@ if (isset($_GET['action'])){
 		echo $db->exec('DELETE FROM zettel');
 	}
 }
+$id = r('id');
+if ($id > ''){
 
-extract($_POST); //the worst part ;D
-
-if (isset($id)){
-	if (isset($pos))  save($id, 'pos',  $pos);
-	if (isset($size)) save($id, 'size', $size);
-	if (isset($text)) save($id, 'text', $text);
+	if (r('pos')) save($id, 'pos',  r('pos'));
+	if (r('size')) save($id, 'size', r('size'));
+	if (r('text')) save($id, 'text', r('text'));
 }
 
 function save($id,$key,$value){
+	echo $key;
 	global $db;
 	if (is_array($value)) $value=implode(',',$value);
-	echo "Saving $id,$key";
+	echo "Saving $id,$key \n";
 	$sql = "INSERT OR REPLACE INTO zettel (id,key,value) VALUES ('$id','$key','$value') ";
+	echo $sql;
 	$res = $db->exec($sql);
-	// var_dump($res);
+	if ($res === false) echo "\n error: is zettel.sqlite writable?";
+	echo "\n dbo->exec result : "; var_dump($res);
+}
+function r($key){
+
+	if (isset ($_REQUEST[$key])) return  $_REQUEST[$key];
+	return false;
 }
