@@ -1,9 +1,0 @@
-{
-	"folders":
-	[
-		{
-			"path": "/var/www/zettel",
-			"folder_exclude_patterns": [".sass-cache"]
-		}
-	]
-}
