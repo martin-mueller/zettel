@@ -28,7 +28,7 @@ if ($id > ''){
 		if (r('size')) save($id, 'size', r('size'));
 		if (r('text')) save($id, 'text', r('text'));
 	}
-	else "Server Error: id not valid, cannot save";	
+	else echo "Server Error: id not valid, cannot save";	
 }
 
 function save($id,$key,$value){
