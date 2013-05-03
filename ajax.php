@@ -21,29 +21,27 @@ if (isset($_GET['action'])){
 		echo $db->exec('DELETE FROM zettel');
 	}
 }
-$id = r('id');
-if ($id > ''){
-	if(preg_match('/^drag\d{1,2}$/', $id) == 1){
-		if (r('pos')) save($id, 'pos',  r('pos'));
-		if (r('size')) save($id, 'size', r('size'));
-		if (r('text')) save($id, 'text', r('text'));
-	}
-	else "Server Error: id not valid, cannot save";	
+
+//extract($_POST); //the worst part ;D
+// print_r($_POST);
+// echo file_get_contents("php://input");
+if (($id = r($id))>0){
+
+	save($id, 'pos',  r('pos'));
+	save($id, 'size', r('size'));
+	save($id, 'text', r('text'));
 }
 
 function save($id,$key,$value){
-	echo $key;
 	global $db;
 	if (is_array($value)) $value=implode(',',$value);
-	echo "Saving $id,$key \n";
+	echo "Saving $id,$key";
 	$sql = "INSERT OR REPLACE INTO zettel (id,key,value) VALUES ('$id','$key','$value') ";
-	echo $sql;
 	$res = $db->exec($sql);
-	if ($res === false) echo "\n Server Error:  is zettel.sqlite writable?";
-	echo "\n dbo->exec result : "; var_dump($res);
+	// var_dump($res);
 }
+
 function r($key){
-	if (in_array($key, array('id', 'pos', 'text')))
-		if (isset ($_REQUEST[$key])) return  $_REQUEST[$key];
+	if (isset ($_REQUEST[$key])) return  $_REQUEST[$key];
 	return false;
 }
