@@ -9,6 +9,8 @@ $ ->
 			height: 100	
 		text: "Lorem ipsum dolor sit amet"
 
+		el = null;
+
 		constructor: (options) ->
 			# if el 
 			# 	@$el = $(el)
@@ -16,29 +18,45 @@ $ ->
 				console.log options
 				{@id, @pos, @size, @text} = options
 
-			
+				console.log @size
 
 		insert: (container) ->
 			@container = $(container)
 			@$el = $ "<div class=\"note ui-widget-content\" id=\"note#{@id}\">
-				<h3 class=\"ui-widget-header\">Notes</h3><textarea>#{@text}</textarea></div>"
+				<!-- h3 class=\"ui-widget-header\">Notes</h3 --><textarea>#{@text}</textarea></div>"
 
 			@container.append @$el
-			@_setPosition
-			@_setSize
+			@_setPosition()
+			@_setSize()
 			
 			@$el.draggable
 				stack: @$el
-			@$el.resizable()
+				stop: (event,ui) =>
+					@save "pos"
+
+			@$el.resizable
+				stop: (event,ui) =>
+					@save "size"
 			return
-							
+		
+		save: (what) ->
+			reqString = {"id": "note#{@id}", "action": "save"} 
+			
+			reqString[what]   = @[what]
+			$.post "./ajax.php",
+				reqString,
+				(data) -> console.log(data)
+
+
+
+
+
 		_setPosition: ->
-			@$el.width @size.width
-			@$el.height @size.height
+			@$el.offset @pos
 
 		_setSize: ->	
-			@$el.offset @pos
-							
+			@$el.width @size.width
+			@$el.height @size.height				
 	note = new Note 
 				id: 2
 				pos: {top: 100, left: 100}

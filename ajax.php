@@ -23,7 +23,7 @@ if (isset($_GET['action'])){
 }
 $id = r('id');
 if ($id > ''){
-	if(preg_match('/^drag\d{1,2}$/', $id) == 1){
+	if(preg_match('/^note\d{1,2}$/', $id) == 1){
 		if (r('pos')) save($id, 'pos',  r('pos'));
 		if (r('size')) save($id, 'size', r('size'));
 		if (r('text')) save($id, 'text', r('text'));
