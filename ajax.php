@@ -16,20 +16,32 @@ if (isset($_GET['action'])){
 			}
 		else echo 'null';	
 	}
+	elseif ($action == "newId") {
+		$sql = "SELECT MAX(id) FROM zettel";
+		// echo $sql;
+		 $res = $db->query($sql);
+
+		$max = $res->fetch();
+		echo json_encode(array("id"=>(int) substr($max["MAX(id)"], 4, strlen($max["MAX(id)"]) -4 )+1));
+
+	}
 	elseif ($action == 'clearAll') {
 
 		echo $db->exec('DELETE FROM zettel');
 	}
 }
-$id = r('id');
-if ($id > ''){
-	if(preg_match('/^note\d{1,2}$/', $id) == 1){
-		if (r('pos')) save($id, 'pos',  r('pos'));
-		if (r('size')) save($id, 'size', r('size'));
-		if (r('text')) save($id, 'text', r('text'));
+else{
+	$id = r('id');
+	if ($id > ''){
+		if(preg_match('/^note\d{1,2}$/', $id) == 1){
+			if (r('pos')) save($id, 'pos',  r('pos'));
+			if (r('size')) save($id, 'size', r('size'));
+			if (r('text')) save($id, 'text', r('text'));
+		}
+		else echo "Server Error: id not valid, cannot save";	
 	}
-	else echo "Server Error: id not valid, cannot save";	
 }
+
 
 function save($id,$key,$value){
 	echo $key;
