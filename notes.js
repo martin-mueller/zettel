@@ -22,7 +22,7 @@
         }
     });
     $('.draggable').mouseup(function(){
-      $('.marked', this).hide();
+      $('.marked', this).remove();
       $('textarea',this).show();
       $('textarea',this).focus();
     });
