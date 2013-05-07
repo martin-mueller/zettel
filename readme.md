@@ -23,7 +23,12 @@ It's just a small demo yet.
 * upload the files to a directory under your webserver root
 * make sure the directory is writeable for the web server for the sqlite database file
 
+## Usage
 
+* You have 10 sheets for now, click one short and fill it with content in [markdown format](http://daringfireball.net/projects/markdown/)
+* When done click on another sheet or on a free space inside the page,
+	your content will be saved
+* drag and resize the sheets -> position and size are saved automatically	
 
 ## Coming soon:
 
@@ -41,4 +46,5 @@ It's just a small demo yet.
 * add/ delete notes
 * zoom in-> detail view; zoom out-> pin board view
 * keyboard shortcuts/ completion
+* fork to dashboard app -> show foreign contents in iframes(Videoes, search, etc.)
 * ...
