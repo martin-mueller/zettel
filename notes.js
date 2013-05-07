@@ -47,7 +47,7 @@
                 });
         }
     });
-    $('#wrapper').click(event, function () {
+    $('#wrapper').click(function (event) {
       if (event.toElement.localName != 'textarea'){
         editDone(editEl);
         editEl = undefined;
