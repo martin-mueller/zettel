@@ -1,10 +1,30 @@
  $(function() {
     var editBuffer = '';
+    var isMouseDown = false;
+    var isDragging = false,
+        isResizing = false;
+    var editEl;
+
+    $('body').mousedown(function() {
+        isMouseDown = true;
+    })
+    .mouseup(function() {
+        isMouseDown = false;
+    });
+
     $( ".draggable" ).draggable({
       stack: '.draggable',
+      cursor: 'move',
+      delay: 100, 
       /*Save position to db after dragging*/
       /*TODO: Save z-index*/
-       stop: function(event,ui) {
+      start: function(){
+        isDragging = true;
+      },
+      stop: function(event,ui) {
+        window.setTimeout(function () {
+          isDragging = false;
+        }, 100);
         $.post('ajax.php',
                {id: $(this).attr('id'), pos: ui.position},
                function(data) {
@@ -13,8 +33,13 @@
       }
     })
     .resizable({
+      start: function(){
+        isResizing = true;
+      },
        stop: function(event,ui) {
-        console.log(ui.size);
+         window.setTimeout(function () {
+          isResizing = false;
+        }, 100);
         $.post('ajax.php',
           {id: $(this).attr('id'), size: ui.size},
           function(data) {
@@ -22,32 +47,49 @@
                 });
         }
     });
-    $('.draggable').mouseup(function(){
-      $('.marked', this).remove();
-      $('textarea',this).show();
-      $('textarea',this).focus();
-      editBuffer = $('textarea',this).val();
+    $('#wrapper').click(event, function () {
+      if (event.toElement.localName != 'textarea'){
+        editDone(editEl);
+        editEl = undefined;
+      }
+    });
+    $('.draggable').mouseup(function () {
+      editDone(editEl);
+      editEl = undefined;
+      enableEdit(this);
     });
     $('.draggable').dblclick(function(event) {
-      console.log(event);
        $('textarea',this).select();
-       console.log($('textarea',this));
     });
     $('.draggable').focusout(function() {
+      editDone(editEl);
+      editEl = undefined;
+      }
+    );
+    function enableEdit(el){
+        if (!isDragging && !isResizing){
+          editEl = el;
+          $('.marked', el).remove();
+          $('textarea',el).show();
+          editBuffer = $('textarea',el).val();
+        }
+    }
+    function editDone(el){
+      if (el !== undefined){
       /*Prevent doubling*/      
-        if ($('.marked',this).length === 0)
-          showMarked(this);
+        if ($('.marked',el).length === 0){
+          showMarked(el);
+        }
       /*Save only after change*/
-      if ($('textarea',this).val()!=editBuffer)
-        $.post('ajax.php',
-               {id: $(this).attr('id'), text: $('textarea',this).val()},
+        if ($('textarea',el).val()!=editBuffer){
+          $.post('ajax.php',
+               {id: $(el).attr('id'), text: $('textarea',el).val()},
                function(data) {
                   console.log(data);
                 });
         }
-    );
-
-
+      }
+    }
     function showMarked(el){
         var text_v   = $('textarea',el).val();
         var marked_v = '<div class="marked">' + marked(text_v) + '</div>';
@@ -73,11 +115,13 @@
                 /*Set positions*/
                     $.each(data,function(index,v){
                       if (v.key == 'pos'){
+                        var pos = [];
                         pos = v.value.split(',');
                         $('#'+v.id).animate({top:pos[0]+'px',left:pos[1]+'px'},1000);
                       }
                 /*Set Size*/      
                       else if  (v.key == 'size'){
+                        var size = [];
                         size = v.value.split(',');
                         $('#'+v.id).animate({width:size[0]+'px',height:size[1]+'px'},1000);
                       }
