@@ -1,4 +1,5 @@
  $(function() {
+    var editBuffer = '';
     $( ".draggable" ).draggable({
       stack: '.draggable',
       /*Save position to db after dragging*/
@@ -25,6 +26,7 @@
       $('.marked', this).remove();
       $('textarea',this).show();
       $('textarea',this).focus();
+      editBuffer = $('textarea',this).val();
     });
     $('.draggable').dblclick(function(event) {
       console.log(event);
@@ -32,7 +34,11 @@
        console.log($('textarea',this));
     });
     $('.draggable').focusout(function() {
-        showMarked(this);
+      /*Prevent doubling*/      
+        if ($('.marked',this).length === 0)
+          showMarked(this);
+      /*Save only after change*/
+      if ($('textarea',this).val()!=editBuffer)
         $.post('ajax.php',
                {id: $(this).attr('id'), text: $('textarea',this).val()},
                function(data) {

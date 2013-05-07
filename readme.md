@@ -23,12 +23,15 @@ It's just a small demo yet.
 * upload the files to a directory under your webserver root
 * make sure the directory is writeable for the web server for the sqlite database file
 
+
+
 ## Coming soon:
 
-* Zettel.coffee
+* Zettel.coffee (now on devel branch)
 
 ## Planned Improvements
 
+* save z-index
 * ajax/json HTTP 1.1 instead of POST (?)
 * local storage + optional cloud service
 * auto save after time (now only on textarea.focusout)
@@ -37,6 +40,5 @@ It's just a small demo yet.
 * headers
 * add/ delete notes
 * zoom in-> detail view; zoom out-> pin board view
-* markdown support
 * keyboard shortcuts/ completion
 * ...
