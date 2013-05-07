@@ -1,3 +1,8 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
 body, html, textarea {
   font-family: Verdana, Arial;
   font-size: 16px;
@@ -85,4 +90,13 @@ textarea {
   pointer-events: none;
   outline: none;
   border: 0;
+}
+
+h1 {
+  font-size: 1.2em;
+  margin: 0.2em 0;
+}
+
+ul {
+  list-style-position: inside;
 }

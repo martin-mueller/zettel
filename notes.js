@@ -22,6 +22,8 @@
         }
     });
     $('.draggable').mouseup(function(){
+      $('.marked', this).hide();
+      $('textarea',this).show();
       $('textarea',this).focus();
     });
     $('.draggable').dblclick(function(event) {
@@ -30,16 +32,33 @@
        console.log($('textarea',this));
     });
     $('.draggable').focusout(function() {
+        showMarked(this);
         $.post('ajax.php',
-               {id: $(this).attr('id'), text: $('textarea',this).val()},
+               {id: $(this).attr('id'), text: text_v},
                function(data) {
                   console.log(data);
                 });
         }
     );
+
+
+    function showMarked(el){
+        var text_v   = $('textarea',el).val();
+        var marked_v = '<div class="marked">' + marked(text_v) + '</div>';
+
+        $(el).append(marked_v);
+        $('textarea',el).hide();
+    }
+
+
+
+
     /*Initialisation*/
     /*Get Notes from database*/
     function init(){
+      marked.setOptions({
+        breaks: true
+      });
       $.get('ajax.php',
             {action: 'getAll'},
             function(data) {
@@ -59,6 +78,7 @@
                 /*Set Text*/      
                       else if (v.key == 'text'){
                         $('#'+v.id+'>textarea').val(v.value);
+                        showMarked('#'+v.id);
                       }
                      
                     });

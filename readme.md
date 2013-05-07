@@ -3,6 +3,7 @@ Zettel - Very Simple Sticky Notes Tool with jquery/ajax/php/sqlite
 
 * Draggable
 * Resizable
+* Write in Markdown, uses (https://github.com/chjj/marked)
 * Save on Blur
 * Unsecure
 * Still alpha
