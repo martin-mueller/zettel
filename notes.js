@@ -34,7 +34,7 @@
     $('.draggable').focusout(function() {
         showMarked(this);
         $.post('ajax.php',
-               {id: $(this).attr('id'), text: text_v},
+               {id: $(this).attr('id'), text: $('textarea',this).val()},
                function(data) {
                   console.log(data);
                 });

@@ -43,7 +43,7 @@ function save($id,$key,$value){
 	echo "\n dbo->exec result : "; var_dump($res);
 }
 function r($key){
-	if (in_array($key, array('id', 'pos', 'text')))
+	if (in_array($key, array('id','size','pos','text')))
 		if (isset ($_REQUEST[$key])) return  $_REQUEST[$key];
 	return false;
 }
