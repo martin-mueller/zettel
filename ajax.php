@@ -1,5 +1,10 @@
 <?php 
-$db = new PDO('sqlite:zettel.sqlite');
+try{
+	$db = new PDO('sqlite:zettel.sqlite');
+}
+catch (PDOException $e) {
+    echo 'Connection failed: ' . $e->getMessage();
+}
 $db->exec('CREATE TABLE IF NOT EXISTS zettel (id, key, value, PRIMARY KEY (id, key))');
 
 

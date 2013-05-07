@@ -1,5 +1,7 @@
-Zettel - Very Simple Sticky Notes Tool with jquery/ajax/php/sqlite
-==================================================================
+Zettel - Very Simple Sticky Notes app with jquery/ php/ sqlite/ markdown
+========================================================================
+
+## Features
 
 * Draggable
 * Resizable
@@ -7,6 +9,8 @@ Zettel - Very Simple Sticky Notes Tool with jquery/ajax/php/sqlite
 * Save on Blur
 * Unsecure
 * Still alpha
+
+### example screenshot:
 
 ![Screenshot](http://decentweb.de/zettel.jpg)
 
