@@ -8,6 +8,8 @@ Zettel - Very Simple Sticky Notes Tool with jquery/ajax/php/sqlite
 * Unsecure
 * Still alpha
 
+![Screenshot](http://decentweb.de/zettel.jpg)
+
 ## Warning
 
 Don't use this on a production server, if you do,
