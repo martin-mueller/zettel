@@ -43,11 +43,13 @@ It's just a small demo yet.
 ## Planned Improvements
 
 * save z-index
-* ajax/json HTTP 1.1 instead of POST (?)
-* local storage + optional cloud service
+* simple login stuff
+* json/ REST api instead of POST/GET only
+* local storage (offline) + server sync
 * auto save after time (now only on textarea.focusout)
 * change colors, colorpicker
 * multi desks/ categories
+* different widget types (priority w., progress widget)
 * headers
 * add/ delete notes
 * zoom in-> detail view; zoom out-> pin board view
