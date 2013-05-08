@@ -1,4 +1,5 @@
 $ ->
+	lastId = null;
 	class Note
 		id:	  null
 		pos:  
@@ -8,15 +9,16 @@ $ ->
 			width:  200
 			height: 100	
 		text: "Lorem ipsum dolor sit amet"
-		_lastId: null;
 		el = null;
 
 		constructor: (options) ->
 			# if el 
 			# 	@$el = $(el)
 			if options
-				console.log options
-				{@id, @pos, @size, @text} = options
+				for key, value of options
+					@[key] = value if key of @ 
+				# console.log options
+				# {@id, @pos, @size, @text} = options
 
 				console.log @size
 				
@@ -24,8 +26,10 @@ $ ->
 		insert: (container) ->
 			@container = $(container)
 			if @id is null
-				@newId()
-				console.log @id	
+
+				@newId
+				return
+				# console.log @id	
 			@$el = $ "<div class=\"note ui-widget-content\" id=\"note#{@id}\">
 				<!-- h3 class=\"ui-widget-header\">Notes</h3 --><textarea>#{@text}</textarea></div>"
 
@@ -34,13 +38,16 @@ $ ->
 			@_setSize()
 			
 			@$el.draggable
-				stack: 'note'
+				stack: '.note'
 				stop: (event,ui) =>
 					@save "pos"
 
 			@$el.resizable
 				stop: (event,ui) =>
 					@save "size"
+			@save "pos"
+			@save "size"
+			@save "text"		
 			return
 		
 		save: (what) ->
@@ -53,19 +60,23 @@ $ ->
 				(data) -> console.log(data)
 
 		newId: ->
-			
+			if (lastId)
+				lastId = lastId + 1
+
+				return lastId
+			else	
 			$.get "./ajax.php",
 				action: "newId",
 				(data) => 
-					console.log data
-					# if @_lastId @id = @_lastId + 1
+					# console.log data
 					@setId(data)
-				,"json"
-					
-		setId: (data) ->
-			
-			@id = data['id']		
 
+					@insert(@container)
+				,"json"
+		
+		setId: (data) ->
+			@id = data['id']		
+			lastId = data['id']
 		_setPosition: ->
 			@$el.offset @pos
 
@@ -74,16 +85,14 @@ $ ->
 			@$el.height @size.height				
 	note1 = new Note 
 			id:	  null
-			pos:  
-				top: 100
-				left: 20
 			size: 
-				width:  200
-				height: 200	
-			text: "Lorem ipsum dolor sit amet"
+				width:  900
+				height: 400	
+			
 
 	note2 = new Note 
 			id:	  null
+			bla: "test"
 			pos:  
 				top: 150
 				left: 300
@@ -98,8 +107,8 @@ $ ->
 				left: 220
 			size: 
 				width:  200
-				height: 200	
-			text: "Lorem ipsum dolor sit amet"
+				height: 700	
+			text: "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime, est neque minima? Cum, alias, fuga ipsum modi doloribus deserunt libero veritatis numquam voluptatibus ut nulla exercitationem dolores placeat rerum dolor."
 
 	note4 = new Note 
 			id:	  null
