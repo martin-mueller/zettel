@@ -51,7 +51,7 @@
     });
     $('#wrapper').click(function (event) {
       console.log(event);
-      if (event.toElement === undefined || event.toElement.localName != 'textarea'){
+      if (event.target.type != 'textarea'){
         editDone(editEl);
         
       }
