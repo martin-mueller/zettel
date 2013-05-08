@@ -50,7 +50,8 @@
         }
     });
     $('#wrapper').click(function (event) {
-      if (event.toElement.localName != 'textarea'){
+      console.log(event);
+      if (event.toElement === undefined || event.toElement.localName != 'textarea'){
         editDone(editEl);
         
       }
