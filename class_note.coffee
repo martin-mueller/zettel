@@ -1,22 +1,24 @@
 $ ->
-	lastId = null;
 	class Note
-		id:	  null
-		pos:  
-			top: 100
-			left: 20
-		size: 
-			width:  200
-			height: 100	
-		text: "Lorem ipsum dolor sit amet"
+		defaults =
+			id:	  null
+			pos:  
+				top: 100
+				left: 20
+			size: 
+				width:  200
+				height: 100	
+			text: "Lorem ipsum dolor sit amet"
 		el = null;
 
 		constructor: (options) ->
 			# if el 
 			# 	@$el = $(el)
-			if options
-				for key, value of options
-					@[key] = value if key of @ 
+			for key, value of defaults
+				if options[key]
+					@options[key] = value
+				else
+					@options[key] = defaults[key]	 
 				# console.log options
 				# {@id, @pos, @size, @text} = options
 
@@ -25,11 +27,7 @@ $ ->
 
 		insert: (container) ->
 			@container = $(container)
-			if @id is null
-
-				@newId
-				return
-				# console.log @id	
+		
 			@$el = $ "<div class=\"note ui-widget-content\" id=\"note#{@id}\">
 				<!-- h3 class=\"ui-widget-header\">Notes</h3 --><textarea>#{@text}</textarea></div>"
 
@@ -59,20 +57,8 @@ $ ->
 				reqString,
 				(data) -> console.log(data)
 
-		newId: ->
-			if (lastId)
-				lastId = lastId + 1
-
-				return lastId
-			else	
-			$.get "./ajax.php",
-				action: "newId",
-				(data) => 
-					# console.log data
-					@setId(data)
-
-					@insert(@container)
-				,"json"
+		create: ->
+		
 		
 		setId: (data) ->
 			@id = data['id']		
