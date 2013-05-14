@@ -49,13 +49,7 @@
                 });
         }
     });
-    $('#wrapper').click(function (event) {
-      console.log(event);
-      if (event.target.type != 'textarea'){
-        editDone(editEl);
-        
-      }
-    });
+
     $('.draggable').mouseup(function () {
       editDone(editEl);
       enableEdit(this);
@@ -70,17 +64,14 @@
     function enableEdit(el){
         if (!isDragging && !isResizing){
           editEl = el;
-          $('.marked', el).remove();
-          $('textarea',el).show();
+          $('.marked', el).hide();
+          $('textarea',el).show().focus();
           editBuffer = $('textarea',el).val();
         }
     }
     function editDone(el){
       if (el !== undefined){
-      /*Prevent doubling*/      
-        if ($('.marked',el).length === 0){
           showMarked(el);
-        }
       /*Save only after change*/
         if ($('textarea',el).val()!=editBuffer){
           $.post('ajax.php',
@@ -94,10 +85,10 @@
     }
     function showMarked(el){
         var text_v   = $('textarea',el).val();
-        var marked_v = '<div class="marked">' + marked(text_v) + '</div>';
-
-        $(el).append(marked_v);
+        var marked_v = marked(text_v);
+        $('.marked',el).html(marked_v);
         $('textarea',el).hide();
+        $('.marked',el).show();
     }
 
 
@@ -142,7 +133,8 @@
                   }
                   else alert("An Error occured, cannot read data");
               }
-            );
+            );//$.get end
+        
        }
        init();
     $('#clear').click(function () {
@@ -151,7 +143,6 @@
             {action: 'clearAll'},
             function(data) {
               location.reload();
-              // console.log(data);
             }
         );
     });
